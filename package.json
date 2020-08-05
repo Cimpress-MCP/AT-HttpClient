@@ -1,0 +1,71 @@
+{
+  "name": "@atsquad/httpclient",
+  "version": "0.0.1",
+  "description": "A wrapper around axios with retry and caching logic, bearer token injection through custom resolvers and extended logging",
+  "main": "lib/httpClient.js",
+  "private": false,
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "build": "tsc && typedoc",
+    "test": "jest",
+    "lint": "eslint --ext .ts src"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Cimpress-MCP/AT-HttpClient.git"
+  },
+  "author": "Alpha Tango Squad",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Cimpress-MCP/AT-HttpClient/issues"
+  },
+  "homepage": "https://github.com/Cimpress-MCP/AT-HttpClient#readme",
+  "dependencies": {
+    "axios": "0.19.2",
+    "uuid": "8.2.0"
+  },
+  "peerDependencies": {
+    "aws-sdk": "^2.0.0"
+  },
+  "devDependencies": {
+    "@types/jest": "26.0.8",
+    "@types/uuid": "8.0.0",
+    "eslint": "7.5.0",
+    "eslint-config-cimpress-atsquad": "2.1.0",
+    "husky": "4.2.5",
+    "jest": "26.2.1",
+    "lint-staged": "10.2.11",
+    "prettier": "2.0.5",
+    "ts-jest": "26.1.4",
+    "ts-node": "8.10.2",
+    "typedoc": "^0.17.8",
+    "typescript": "3.9.7"
+  },
+  "eslintConfig": {
+    "extends": "cimpress-atsquad"
+  },
+  "prettier": "eslint-config-cimpress-atsquad/prettier",
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.ts": [
+      "prettier --write",
+      "eslint"
+    ],
+    "*.{js,json,yml,yaml,md}": [
+      "prettier --write"
+    ]
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "collectCoverage": false
+  },
+  "engines": {
+    "node": ">=10.0.0"
+  }
+}
