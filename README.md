@@ -7,12 +7,12 @@ A wrapper around axios with retry and caching logic, bearer token injection thro
 Install the library.
 
 ```bash
-yarn add @atsquad/httpclient
+yarn add @alphatango/httpclient
 ```
 
 ```javascript
-const HttpClient = require('@atsquad/httpclient');
-const Logger = require('@atsquad/logger');
+const HttpClient = require('@alphatango/httpclient');
+const Logger = require('@alphatango/logger');
 
 let logger = new Logger();
 let httpClient = new HttpClient({
