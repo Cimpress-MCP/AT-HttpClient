@@ -1,6 +1,6 @@
 {
   "name": "@alphatango/httpclient",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A wrapper around axios with retry and caching logic, bearer token injection through custom resolvers and extended logging",
   "main": "lib/httpClient.js",
   "private": false,
@@ -23,8 +23,8 @@
   },
   "homepage": "https://github.com/Cimpress-MCP/AT-HttpClient#readme",
   "dependencies": {
-    "axios": "0.19.2",
-    "uuid": "8.2.0"
+    "axios": "^0.19.0",
+    "uuid": "^8.2.0"
   },
   "peerDependencies": {
     "aws-sdk": "^2.0.0"
