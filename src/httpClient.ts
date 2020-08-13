@@ -182,5 +182,5 @@ export default class HttpClient {
 export interface HttpClientOptions {
   client?: AxiosInstance;
   tokenResolver?: () => Promise<string>;
-  logFunction: (...msg) => void;
+  logFunction?: (...msg) => void;
 }
