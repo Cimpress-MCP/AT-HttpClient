@@ -22,7 +22,7 @@ jobs:
         run: yarn
 
       - name: Build docs
-        run: yarn run typedoc
+        run: yarn build:docs
 
       - name: Publish
         uses: JamesIves/github-pages-deploy-action@3.5.9
