@@ -1,6 +1,6 @@
 {
   "name": "@alphatango/httpclient",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "A wrapper around axios with retry and caching logic, bearer token injection through custom resolvers and extended logging",
   "main": "lib/httpClient.js",
   "private": false,
