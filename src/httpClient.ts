@@ -1,7 +1,13 @@
 /* eslint-disable no-console, no-param-reassign */
 
-import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
+import axios, { AxiosAdapter, AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import * as uuid from 'uuid';
+import cacheAdapterEnhancer, {
+  Options as CacheOptions,
+} from 'axios-extensions/lib/cacheAdapterEnhancer';
+import retryAdapterEnhancer, {
+  Options as RetryOptions,
+} from 'axios-extensions/lib/retryAdapterEnhancer';
 
 const invalidToken: string = 'Invalid token';
 let requestId: string = '';
@@ -13,13 +19,32 @@ export default class HttpClient {
 
   private readonly client: AxiosInstance;
 
+  private readonly enableRetry: boolean;
+
+  private readonly enableCache: boolean;
+
   /**
    * Create a new Instance of the HttpClient
    */
   constructor(options?: HttpClientOptions) {
     this.logFunction = options?.logFunction ?? console.log;
     this.tokenResolverFunction = options?.tokenResolver;
-    this.client = options?.client ?? axios.create();
+    this.enableCache = options?.enableCache ?? false;
+    this.enableRetry = options?.enableRetry ?? false;
+    this.client =
+      options?.client ??
+      axios.create({
+        adapter: (() => {
+          let adapters = axios.defaults.adapter as AxiosAdapter;
+          if (this.enableCache) {
+            adapters = cacheAdapterEnhancer(adapters, options?.cacheOptions);
+          }
+          if (this.enableRetry) {
+            adapters = retryAdapterEnhancer(adapters, options?.retryOptions);
+          }
+          return adapters;
+        })(),
+      });
 
     this.client.interceptors.request.use(
       (config) => {
@@ -110,12 +135,11 @@ export default class HttpClient {
     url: string,
     config: AxiosRequestConfig = { responseType: 'json' },
   ): Promise<AxiosResponse<T>> {
-    config = {
+    return this.client.get<T>(url, {
       responseType: 'json',
       ...config,
       headers: await this.createHeadersWithResolvedToken(config.headers),
-    };
-    return this.client.get<T>(url, config);
+    });
   }
 
   /**
@@ -180,7 +204,34 @@ export default class HttpClient {
 }
 
 export interface HttpClientOptions {
+  /**
+   * An Axios Instance (disables caching and retrying)
+   */
   client?: AxiosInstance;
+  /**
+   * A function that returns a bearer token
+   */
   tokenResolver?: () => Promise<string>;
+  /**
+   * Logger function
+   */
   logFunction?: (...msg) => void;
+  /**
+   * enable caching (false by default)
+   */
+  enableCache?: boolean;
+  /**
+   * Cache options
+   * @link https://github.com/kuitos/axios-extensions#cacheadapterenhancer
+   */
+  cacheOptions?: CacheOptions;
+  /**
+   * Enable automatic retries
+   */
+  enableRetry?: boolean;
+  /**
+   * Retry options
+   * @link https://github.com/kuitos/axios-extensions#cacheadapterenhancer
+   */
+  retryOptions?: RetryOptions;
 }
