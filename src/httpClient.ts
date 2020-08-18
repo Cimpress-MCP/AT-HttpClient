@@ -1,7 +1,7 @@
 /* eslint-disable no-console, no-param-reassign */
 
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
-import uuid from 'uuid';
+import * as uuid from 'uuid';
 
 const invalidToken: string = 'Invalid token';
 let requestId: string = '';
