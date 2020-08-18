@@ -82,8 +82,12 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_httpclient_.httpclientoptions.html#cacheoptions" class="tsd-kind-icon">cache<wbr>Options</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_httpclient_.httpclientoptions.html#client" class="tsd-kind-icon">client</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_httpclient_.httpclientoptions.html#enablecache" class="tsd-kind-icon">enable<wbr>Cache</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_httpclient_.httpclientoptions.html#enableretry" class="tsd-kind-icon">enable<wbr>Retry</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_httpclient_.httpclientoptions.html#logfunction" class="tsd-kind-icon">log<wbr>Function</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_httpclient_.httpclientoptions.html#retryoptions" class="tsd-kind-icon">retry<wbr>Options</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_httpclient_.httpclientoptions.html#tokenresolver" class="tsd-kind-icon">token<wbr>Resolver</a></li>
 							</ul>
 						</section>
@@ -93,14 +97,69 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="cacheoptions" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> cache<wbr>Options</h3>
+					<div class="tsd-signature tsd-kind-icon">cache<wbr>Options<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">CacheOptions</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/Cimpress-MCP/AT-HttpClient/blob/071e19e/src/httpClient.ts#L227">httpClient.ts:227</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Cache options</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>link</dt>
+							<dd><p><a href="https://github.com/kuitos/axios-extensions#cacheadapterenhancer">https://github.com/kuitos/axios-extensions#cacheadapterenhancer</a></p>
+							</dd>
+						</dl>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="client" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> client</h3>
 					<div class="tsd-signature tsd-kind-icon">client<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">AxiosInstance</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Cimpress-MCP/AT-HttpClient/blob/b615c95/src/httpClient.ts#L183">httpClient.ts:183</a></li>
+							<li>Defined in <a href="https://github.com/Cimpress-MCP/AT-HttpClient/blob/071e19e/src/httpClient.ts#L210">httpClient.ts:210</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>An Axios Instance (disables caching and retrying)</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="enablecache" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> enable<wbr>Cache</h3>
+					<div class="tsd-signature tsd-kind-icon">enable<wbr>Cache<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">true</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/Cimpress-MCP/AT-HttpClient/blob/071e19e/src/httpClient.ts#L222">httpClient.ts:222</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>enable caching (false by default)</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="enableretry" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> enable<wbr>Retry</h3>
+					<div class="tsd-signature tsd-kind-icon">enable<wbr>Retry<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">true</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/Cimpress-MCP/AT-HttpClient/blob/071e19e/src/httpClient.ts#L231">httpClient.ts:231</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Enable automatic retries</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="logfunction" class="tsd-anchor"></a>
@@ -108,9 +167,34 @@
 					<div class="tsd-signature tsd-kind-icon">log<wbr>Function<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>msg<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Cimpress-MCP/AT-HttpClient/blob/b615c95/src/httpClient.ts#L185">httpClient.ts:185</a></li>
+							<li>Defined in <a href="https://github.com/Cimpress-MCP/AT-HttpClient/blob/071e19e/src/httpClient.ts#L218">httpClient.ts:218</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Logger function</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="retryoptions" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> retry<wbr>Options</h3>
+					<div class="tsd-signature tsd-kind-icon">retry<wbr>Options<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">RetryOptions</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/Cimpress-MCP/AT-HttpClient/blob/071e19e/src/httpClient.ts#L236">httpClient.ts:236</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Retry options</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>link</dt>
+							<dd><p><a href="https://github.com/kuitos/axios-extensions#cacheadapterenhancer">https://github.com/kuitos/axios-extensions#cacheadapterenhancer</a></p>
+							</dd>
+						</dl>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="tokenresolver" class="tsd-anchor"></a>
@@ -118,9 +202,14 @@
 					<div class="tsd-signature tsd-kind-icon">token<wbr>Resolver<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Cimpress-MCP/AT-HttpClient/blob/b615c95/src/httpClient.ts#L184">httpClient.ts:184</a></li>
+							<li>Defined in <a href="https://github.com/Cimpress-MCP/AT-HttpClient/blob/071e19e/src/httpClient.ts#L214">httpClient.ts:214</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>A function that returns a bearer token</p>
+						</div>
+					</div>
 				</section>
 			</section>
 		</div>
@@ -146,10 +235,22 @@
 						<a href="_httpclient_.httpclientoptions.html" class="tsd-kind-icon">Http<wbr>Client<wbr>Options</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_httpclient_.httpclientoptions.html#cacheoptions" class="tsd-kind-icon">cache<wbr>Options</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="_httpclient_.httpclientoptions.html#client" class="tsd-kind-icon">client</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_httpclient_.httpclientoptions.html#enablecache" class="tsd-kind-icon">enable<wbr>Cache</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_httpclient_.httpclientoptions.html#enableretry" class="tsd-kind-icon">enable<wbr>Retry</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="_httpclient_.httpclientoptions.html#logfunction" class="tsd-kind-icon">log<wbr>Function</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_httpclient_.httpclientoptions.html#retryoptions" class="tsd-kind-icon">retry<wbr>Options</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="_httpclient_.httpclientoptions.html#tokenresolver" class="tsd-kind-icon">token<wbr>Resolver</a>
