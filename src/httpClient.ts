@@ -73,7 +73,7 @@ export default class HttpClient {
           exception: error,
         });
 
-        throw new Error(error.message);
+        throw error;
       },
     );
 
@@ -100,7 +100,7 @@ export default class HttpClient {
           });
         }
 
-        throw new Error(error.message);
+        throw error;
       },
     );
   }
