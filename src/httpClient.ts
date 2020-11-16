@@ -1,16 +1,21 @@
-/* eslint-disable no-console, no-param-reassign */
+/* eslint-disable no-param-reassign */
 
-import axios, { AxiosAdapter, AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
-import * as uuid from 'uuid';
+import axios, {
+  AxiosAdapter,
+  AxiosError,
+  AxiosInstance,
+  AxiosRequestConfig,
+  AxiosResponse,
+} from 'axios';
 import cacheAdapterEnhancer, {
   Options as CacheOptions,
 } from 'axios-extensions/lib/cacheAdapterEnhancer';
 import retryAdapterEnhancer, {
   Options as RetryOptions,
 } from 'axios-extensions/lib/retryAdapterEnhancer';
+import { serializeError } from './util';
 
 const invalidToken: string = 'Invalid token';
-let requestId: string = '';
 
 export default class HttpClient {
   private readonly logFunction: (...msg: any) => void;
@@ -48,29 +53,23 @@ export default class HttpClient {
 
     this.client.interceptors.request.use(
       (config) => {
-        requestId = uuid.v4();
-        this.logFunction(
-          {
-            title: 'HTTP Request',
-            level: 'INFO',
-            requestId,
-            method: config.method,
-            url: config.url,
-          },
-          false,
-        );
+        this.logFunction({
+          title: 'HTTP Request',
+          level: 'INFO',
+          method: config.method,
+          url: config.url,
+        });
 
         if (!config.url) {
           throw new Error('HttpClient Error: "url" must be defined');
         }
         return config;
       },
-      (error) => {
+      (error: AxiosError) => {
         this.logFunction({
           title: 'HTTP Request Error',
           level: 'WARN',
-          requestId: error?.config?.requestId ?? error?.request?.config?.requestId,
-          exception: error,
+          error: serializeError(error),
         });
 
         throw error;
@@ -79,24 +78,18 @@ export default class HttpClient {
 
     this.client.interceptors.response.use(
       (response) => response,
-      (error) => {
-        const errorRequestId =
-          (error && error.config && error.config.requestId) ||
-          (error.request && error.request.config && error.request.config.requestId);
-
+      (error: AxiosError) => {
         if (error.message === invalidToken) {
           this.logFunction({
             title: 'HTTP call skipped due to a token error',
             level: 'INFO',
-            requestId: errorRequestId,
-            exception: error,
+            error: serializeError(error),
           });
         } else {
           this.logFunction({
             title: 'HTTP Response Error',
             level: 'INFO',
-            requestId: errorRequestId,
-            exception: error,
+            error: serializeError(error),
           });
         }
 
