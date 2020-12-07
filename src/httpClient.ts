@@ -1,5 +1,5 @@
-/* eslint-disable no-param-reassign */
-
+import { ClientException, InternalException } from '@alphatango/exceptions';
+import { URL } from 'url';
 import axios, {
   AxiosAdapter,
   AxiosError,
@@ -32,6 +32,7 @@ export default class HttpClient {
    * Create a new Instance of the HttpClient
    */
   constructor(options?: HttpClientOptions) {
+    // eslint-disable-next-line no-console
     this.logFunction = options?.logFunction ?? console.log;
     this.tokenResolverFunction = options?.tokenResolver;
     this.enableCache = options?.enableCache ?? false;
@@ -61,7 +62,7 @@ export default class HttpClient {
         });
 
         if (!config.url) {
-          throw new Error('HttpClient Error: "url" must be defined');
+          throw new InternalException('HttpClient Error: "url" must be defined');
         }
         return config;
       },
@@ -72,7 +73,8 @@ export default class HttpClient {
           error: serializeError(error),
         });
 
-        throw error;
+        const hostname = error.config?.url ? new URL(error.config.url).hostname : 'N/A';
+        throw new ClientException(hostname, error);
       },
     );
 
@@ -93,7 +95,8 @@ export default class HttpClient {
           });
         }
 
-        throw error;
+        const hostname = error.config?.url ? new URL(error.config.url).hostname : 'N/A';
+        throw new ClientException(hostname, error);
       },
     );
   }
@@ -106,7 +109,7 @@ export default class HttpClient {
   ): Promise<Record<string, string>> {
     if (this.tokenResolverFunction) {
       if (headers.Authorization) {
-        throw new Error(
+        throw new InternalException(
           'Authorization header already specified, please create a new HttpClient with a different (or without a) tokenResolver',
         );
       } else {
@@ -143,8 +146,8 @@ export default class HttpClient {
     data: any,
     config: AxiosRequestConfig = {},
   ): Promise<AxiosResponse<T>> {
-    config.headers = await this.createHeadersWithResolvedToken(config.headers);
-    return this.client.post<T>(url, data, config);
+    const headers = await this.createHeadersWithResolvedToken(config.headers);
+    return this.client.post<T>(url, data, { ...config, headers });
   }
 
   /**
@@ -155,8 +158,8 @@ export default class HttpClient {
     data: any,
     config: AxiosRequestConfig = {},
   ): Promise<AxiosResponse<T>> {
-    config.headers = await this.createHeadersWithResolvedToken(config.headers);
-    return this.client.put<T>(url, data, config);
+    const headers = await this.createHeadersWithResolvedToken(config.headers);
+    return this.client.put<T>(url, data, { ...config, headers });
   }
 
   /**
@@ -167,32 +170,32 @@ export default class HttpClient {
     data: any,
     config: AxiosRequestConfig = {},
   ): Promise<AxiosResponse<T>> {
-    config.headers = await this.createHeadersWithResolvedToken(config.headers);
-    return this.client.patch<T>(url, data, config);
+    const headers = await this.createHeadersWithResolvedToken(config.headers);
+    return this.client.patch<T>(url, data, { ...config, headers });
   }
 
   /**
    * Delete the resource on the given url. Bearer token is automatically injected if tokenResolverFunction was provided to the constructor.
    */
   async delete<T = any>(url: string, config: AxiosRequestConfig = {}): Promise<AxiosResponse<T>> {
-    config.headers = await this.createHeadersWithResolvedToken(config.headers);
-    return this.client.delete<T>(url, config);
+    const headers = await this.createHeadersWithResolvedToken(config.headers);
+    return this.client.delete<T>(url, { ...config, headers });
   }
 
   /**
    * Makes a head call to the provided url. Bearer token is automatically injected if tokenResolverFunction was provided to the constructor.
    */
   async head<T = any>(url: string, config: AxiosRequestConfig = {}): Promise<AxiosResponse<T>> {
-    config.headers = await this.createHeadersWithResolvedToken(config.headers);
-    return this.client.head<T>(url, config);
+    const headers = await this.createHeadersWithResolvedToken(config.headers);
+    return this.client.head<T>(url, { ...config, headers });
   }
 
   /**
    * Makes an options call to the provided url. Bearer token is automatically injected if tokenResolverFunction was provided to the constructor.
    */
   async options<T = any>(url: string, config: AxiosRequestConfig = {}): Promise<AxiosResponse<T>> {
-    config.headers = await this.createHeadersWithResolvedToken(config.headers);
-    return this.client.options<T>(url, config);
+    const headers = await this.createHeadersWithResolvedToken(config.headers);
+    return this.client.options<T>(url, { ...config, headers });
   }
 }
 
