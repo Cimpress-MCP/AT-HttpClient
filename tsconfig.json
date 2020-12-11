@@ -15,7 +15,6 @@
     "newLine": "lf"
   },
   "include": ["src/**/*.ts"],
-  "exclude": ["src/**/*.test.ts"],
   "typedocOptions": {
     "name": "ATSquad HTTP Client",
     "readme": "./README.md",

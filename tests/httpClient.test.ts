@@ -1,4 +1,5 @@
-import HttpClient from './httpClient';
+import { InternalException } from '@alphatango/exceptions';
+import HttpClient from '../src/httpClient';
 
 describe('createHeadersWithResolvedToken()', () => {
   test('adds a token', async () => {
@@ -26,8 +27,8 @@ describe('createHeadersWithResolvedToken()', () => {
     const headers = {
       Authorization: 'Bearer abc',
     };
-    await expect(httpClient.createHeadersWithResolvedToken(headers)).rejects.toThrow(
-      'Authorization header already specified, please create a new HttpClient with a different (or without a) tokenResolver',
+    await expect(httpClient.createHeadersWithResolvedToken(headers)).rejects.toBeInstanceOf(
+      InternalException,
     );
   });
 
