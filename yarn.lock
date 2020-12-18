@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@alphatango/exceptions@~2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@alphatango/exceptions/-/exceptions-2.0.0.tgz#320e46798f824dffedda716915c965833152d92a"
-  integrity sha512-UM5b7uYqlp1QBJByviubujEfjeN54/d3FBrOTIy/d/AVyC+iSG+xGT7C24dVzQhSAgNgo0Cn5rjXvR6rDDRYqg==
+"@alphatango/exceptions@^2.1.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@alphatango/exceptions/-/exceptions-2.1.0.tgz#262a538d866992863c830b26c93e7223f4fe4c9c"
+  integrity sha512-voYw0yrS7dLwnvFYyT36O64VozuE7CK3vrsaPTvOoCOVVLnblSTunir7oawht3+xaWESk+X3syT7YC+3eKMoGw==
 
 "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.10.4":
   version "7.10.4"

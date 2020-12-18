@@ -1,6 +1,6 @@
 {
   "name": "@alphatango/httpclient",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "A wrapper around axios with retry and caching logic, bearer token injection through custom resolvers and extended logging",
   "main": "lib/httpClient.js",
   "private": false,
@@ -29,10 +29,10 @@
     "uuid": "^8.3.0"
   },
   "peerDependencies": {
-    "@alphatango/exceptions": "~2.0.0"
+    "@alphatango/exceptions": "^2.0.0"
   },
   "devDependencies": {
-    "@alphatango/exceptions": "~2.0.0",
+    "@alphatango/exceptions": "^2.1.0",
     "@types/jest": "26.0.8",
     "@types/uuid": "8.3.0",
     "eslint": "7.5.0",
